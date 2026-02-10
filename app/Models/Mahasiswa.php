@@ -25,4 +25,9 @@ class Mahasiswa extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+
+    public function presensi()
+    {
+        return $this->hasMany(Presensi::class, 'nim', 'nim');
+    }
 }

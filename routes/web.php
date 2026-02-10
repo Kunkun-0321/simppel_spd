@@ -16,6 +16,7 @@ use App\Http\Controllers\OperasiRutinController;
 use App\Http\Controllers\UbahPasswordController;
 use App\Http\Controllers\KlaimPelanggaranController;
 use App\Http\Controllers\PenindakanHarianController;
+use App\Http\Controllers\ApelController;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -51,6 +52,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/ubah-password', [UbahPasswordController::class, 'ubahPassword']);
     // Kritik Saran
     Route::get('/dashboard/data', [DashboardController::class, 'StatDesk']);
+    Route::get('/daftar-apel', [ApelController::class, 'index'])->name('admin.apel.index');
 });
 
 
@@ -135,6 +137,14 @@ Route::get('/laporan-harian', [PenindakanHarianController::class, 'index'])->mid
 Route::get('/laporan-harian/filter', [PenindakanHarianController::class, 'filter'])->middleware('spd')->name('penindakan-harian.filter');
 Route::get('/laporan-harian/download/{format}', [PenindakanHarianController::class, 'downloadFilteredData'])->middleware('spd')->name('penindakan-harian.download');
 Route::delete('/delete-harian/{id}', [PenindakanHarianController::class, 'destroy'])->middleware('spd')->name('delete.harian');
+
+
+// Route Apel (Admin)
+Route::get('/apel-baru', [ApelController::class, 'create'])->middleware('admin')->name('admin.apel.create');
+Route::post('/apel-baru', [ApelController::class, 'store'])->middleware('admin')->name('admin.apel.store');
+Route::get('/apel/{id}/edit', [ApelController::class, 'edit'])->middleware('admin')->name('admin.apel.edit');
+Route::put('/apel/{id}/update', [ApelController::class, 'update'])->middleware('admin')->name('admin.apel.update');
+Route::delete('/apel/{id}/delete', [ApelController::class, 'destroy'])->middleware('admin')->name('admin.apel.delete');
 
 // Route Klaim Pelanggaran untuk SPD
 Route::get('/klaim-pelanggaran', [KlaimPelanggaranController::class, 'index'])->middleware('spd')->name('klaim-pelanggaran');

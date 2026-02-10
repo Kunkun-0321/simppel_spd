@@ -16,8 +16,7 @@ services:
       mysql:
         condition: service_healthy
     volumes:
-      - app-data:/var/www/html
-      - ./.env:/var/www/html/.env.host
+      - .:/var/www/html
     networks:
       - internal
 
