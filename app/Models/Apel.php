@@ -14,14 +14,10 @@ class Apel extends Model
         'nama_apel',
         'tingkat',
         'tanggal_apel',
+        'waktu_apel',
     ];
 
     protected $casts = [
         'tingkat'=>'integer',
     ];
-
-    public function apel()
-    {
-        return $this->belongsTo(Apel::class, 'apel_id', 'id');
-    }
 }

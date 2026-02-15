@@ -16,9 +16,9 @@ return new class extends Migration
             $table->foreignId("apel_id")->constrained("apel")->onDelete("cascade");
             $table->string("nim")->constrained("mahasiswas")->onDelete("cascade");
             $table->string("nama")->constrained("mahasiswas", "nim")->onDelete("cascade");
-            $table->enum("status", ["hadir", "izin", "sakit", "tidak_hadir"])->default("tidak_hadir");
+            $table->string("kelas")->constrained("mahasiswas", "nim")->onDelete("cascade");
+            $table->enum("status", ["hadir", "terlambat", "izin", "kurang_cukup_bukti_izin", "sakit", "kurang_cukup_bukti_sakit", "tidak_hadir"])->default("tidak_hadir");
             $table->string("nama_petugas")->nullable()->constrained("users")->onDelete("set null");
-            $table->string("keterangan")->nullable();
             $table->timestamps();
             $table->unique(['apel_id', 'nim']);
         });

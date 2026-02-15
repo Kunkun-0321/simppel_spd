@@ -17,6 +17,7 @@ use App\Http\Controllers\UbahPasswordController;
 use App\Http\Controllers\KlaimPelanggaranController;
 use App\Http\Controllers\PenindakanHarianController;
 use App\Http\Controllers\ApelController;
+use App\Http\Controllers\PresensiController;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -52,7 +53,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/ubah-password', [UbahPasswordController::class, 'ubahPassword']);
     // Kritik Saran
     Route::get('/dashboard/data', [DashboardController::class, 'StatDesk']);
-    Route::get('/daftar-apel', [ApelController::class, 'index'])->name('admin.apel.index');
 });
 
 
@@ -140,17 +140,26 @@ Route::delete('/delete-harian/{id}', [PenindakanHarianController::class, 'destro
 
 
 // Route Apel (Admin)
-Route::get('/apel-baru', [ApelController::class, 'create'])->middleware('admin')->name('admin.apel.create');
-Route::post('/apel-baru', [ApelController::class, 'store'])->middleware('admin')->name('admin.apel.store');
-Route::get('/apel/{id}/edit', [ApelController::class, 'edit'])->middleware('admin')->name('admin.apel.edit');
-Route::put('/apel/{id}/update', [ApelController::class, 'update'])->middleware('admin')->name('admin.apel.update');
-Route::delete('/apel/{id}/delete', [ApelController::class, 'destroy'])->middleware('admin')->name('admin.apel.delete');
+Route::get('/apel-baru', [ApelController::class, 'create'])->middleware('admin')->name('apel.create');
+Route::post('/apel-baru', [ApelController::class, 'store'])->middleware('admin')->name('apel.store');
+Route::get('/apel/{id}/edit', [ApelController::class, 'edit'])->middleware('admin')->name('apel.edit');
+Route::put('/apel/{id}/update', [ApelController::class, 'update'])->middleware('admin')->name('apel.update');
+Route::delete('/apel/{id}/delete', [ApelController::class, 'destroy'])->middleware('admin')->name('apel.delete');
+Route::get('/daftar-apel', [ApelController::class, 'index'])->middleware('admin')->name('apel.index');
+Route::get('/presensi/admin-report', [PresensiController::class, 'reportIndex'])->middleware('admin')->name('apel.report');
+Route::post('/presensi/update-status/{id}', [PresensiController::class, 'updateStatusInline'])->middleware('admin')->name('presensi.updateStatus');
+Route::delete('/presensi/{id}', [PresensiController::class, 'destroy'])->middleware('admin')->name('presensi.destroy');
+
+// Route Presensi (SPD)
+Route::get('/presensi', [PresensiController::class, 'pencatatanIndex'])->middleware('spd')->name('presensi.index');
+Route::get('/presensi/scan/{apel_id}', [PresensiController::class, 'scanPage'])->middleware('spd')->name('presensi.scan');
+Route::post('/presensi/scan/{apel_id}', [PresensiController::class, 'storeScan'])->middleware('spd')->name('presensi.store');
+Route::get('/presensi/report', [PresensiController::class, 'reportIndex'])->middleware('spd')->name('presensi.report');
+
 
 // Route Klaim Pelanggaran untuk SPD
 Route::get('/klaim-pelanggaran', [KlaimPelanggaranController::class, 'index'])->middleware('spd')->name('klaim-pelanggaran');
 Route::get('/klaim-pelanggaran/filter', [KlaimPelanggaranController::class, 'filter'])->middleware('spd')->name('klaim-pelanggaran.filter');
-
-
 
 
 //Route::get('/landing', function () {

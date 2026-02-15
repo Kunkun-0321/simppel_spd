@@ -7,7 +7,7 @@
             <p class="text-center text-gray-800 dark:text-gray-400 italic opacity-50">(Mohon isi data jadwal apel di bawah ini)</p>
 
             {{-- Form --}}
-            <form class="max-w-sm mx-auto pt-6" action="{{ route('admin.apel.store') }}" method="POST" id="apelForm">
+            <form class="max-w-sm mx-auto pt-6" action="/apel-baru" method="POST" id="apelForm">
                 @csrf
                 <div class="mb-5">
                     <label for="nama_apel" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama / Jenis Apel</label>
@@ -27,8 +27,14 @@
                         class="shadow bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600">
                 </div>
 
+                <div class="mb-5">
+                    <label for="waktu_apel" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Waktu Pelaksanaan</label>
+                    <input type="time" id="waktu_apel" name="waktu_apel" required
+                        class="shadow bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600">
+                </div>
+
                 <div class="flex justify-end gap-2">
-                    <a href="{{ route('admin.apel.index') }}" class="text-gray-900 bg-white border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mb-2">Batal</a>
+                    <a href="/daftar-apel" class="text-gray-900 bg-white border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mb-2">Batal</a>
                     <button type="submit" class="text-white bg-blue-700 hover:bg-blue-900 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2">
                         Kirim
                     </button>

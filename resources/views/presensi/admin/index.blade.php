@@ -9,7 +9,7 @@
             </div>
             
             @if(Auth::user()->role == 'admin')
-            <a href="{{ route('admin.apel.create') }}" class="flex items-center px-5 py-2.5 text-sm font-medium text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 rounded-lg transition-colors">
+            <a href="{{ route('apel.create') }}" class="flex items-center px-5 py-2.5 text-sm font-medium text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 rounded-lg transition-colors">
                 <svg class="w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7-7v14"/>
                 </svg>
@@ -54,19 +54,12 @@
                 </h5>
                 
                 <div class="mt-auto pt-4 border-t border-gray-100 dark:border-gray-700 flex flex-wrap gap-2">
-                    @if(Auth::user()->role == 'spd')
-                    <a href="{{ route('presensi.create', $apel->id) }}" class="inline-flex items-center justify-center w-full px-3 py-2 text-sm font-medium text-white bg-green-600 rounded-lg hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 transition-colors">
-                        <i class="fas fa-user-check me-2"></i>
-                        Mulai Presensi
-                    </a>
-                    @endif
-
                     @if(Auth::user()->role == 'admin')
-                    <a href="{{ route('admin.apel.edit', $apel->id) }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-yellow-400 rounded-lg hover:bg-yellow-500 transition-colors">
+                    <a href="{{ route('apel.edit', $apel->id) }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-yellow-400 rounded-lg hover:bg-yellow-500 transition-colors">
                         <i class="fas fa-edit me-1"></i> Edit
                     </a>
                     
-                    <form action="{{ route('admin.apel.delete', $apel->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus jadwal ini? Seluruh data presensi terkait akan ikut terhapus.')" class="inline">
+                    <form action="{{ route('apel.delete', $apel->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus jadwal ini? Seluruh data presensi terkait akan ikut terhapus.')" class="inline">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors">
@@ -86,7 +79,7 @@
                 <h3 class="text-lg font-medium text-gray-900 dark:text-white">Belum ada jadwal apel</h3>
                 <p class="text-sm text-gray-500 mb-6">Jadwal yang Anda buat akan muncul di sini dalam bentuk kartu.</p>
                 @if(Auth::user()->role == 'admin')
-                <a href="{{ route('admin.apel.create') }}" class="text-blue-600 font-semibold hover:underline">
+                <a href="{{ route('apel.create') }}" class="text-blue-600 font-semibold hover:underline">
                     Buat Jadwal Pertama Anda &rarr;
                 </a>
                 @endif

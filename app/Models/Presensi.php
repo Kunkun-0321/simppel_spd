@@ -15,9 +15,9 @@ class Presensi extends Model
         'apel_id',
         'nim',
         'nama',
+        'kelas',
         'status',
         'nama_petugas',
-        'keterangan',
     ];
 
     public function apel()

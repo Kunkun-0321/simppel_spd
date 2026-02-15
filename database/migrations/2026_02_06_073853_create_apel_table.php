@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string("nama_apel");
             $table->string("tingkat");
             $table->date("tanggal_apel");
+            $table->time("waktu_apel");
             $table->timestamps();
         });
     }

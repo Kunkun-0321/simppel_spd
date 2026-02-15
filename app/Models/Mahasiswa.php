@@ -11,6 +11,7 @@ class Mahasiswa extends Model
 
     // Nama tabel di database
     protected $table = 'mahasiswas';
+    protected $primaryKey = 'nim'; 
 
     // Kolom yang dapat diisi (mass assignable)
     protected $fillable = [
